@@ -226,7 +226,7 @@ public class CarniceriaPuriscalUno extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonagregarInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonagregarInventarioActionPerformed
-        ventanaValidacion p=new ventanaValidacion();
+        entradaInventario p=new entradaInventario();
         p.setVisible(true);
     }//GEN-LAST:event_botonagregarInventarioActionPerformed
 
