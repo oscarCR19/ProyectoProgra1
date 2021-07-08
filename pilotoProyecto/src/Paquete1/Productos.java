@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *
  * @author oscar
  */
-public class ArrayProductos {
-   public static ArrayList<productos> productos= new ArrayList<productos>();
+public class Productos {
+   public static ArrayList<Producto> productos= new ArrayList<Producto>();
     
 }

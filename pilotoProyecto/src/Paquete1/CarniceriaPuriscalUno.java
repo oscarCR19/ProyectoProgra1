@@ -40,11 +40,11 @@ public class CarniceriaPuriscalUno extends javax.swing.JFrame {
     }
      public void cargar(){
          t.setRowCount(0);
-        for (int i=0;i<ArrayProductos.productos.size();i++){
+        for (int i=0;i<Productos.productos.size();i++){
             t.addRow(new Object[]{
-             ArrayProductos.productos.get(i).getId(),
-              ArrayProductos.productos.get(i).getNombre(),  
-              ArrayProductos.productos.get(i).getCantidad(),  
+             Productos.productos.get(i).getId(),
+              Productos.productos.get(i).getNombre(),  
+              Productos.productos.get(i).getCantidad(),  
                 
             });
         }

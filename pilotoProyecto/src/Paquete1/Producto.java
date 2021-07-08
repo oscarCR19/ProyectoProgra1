@@ -9,7 +9,7 @@ package Paquete1;
  *
  * @author oscar
  */
-public class productos {
+public class Producto {
 
     String id;
     String nombre;

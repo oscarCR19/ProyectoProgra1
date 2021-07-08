@@ -25,13 +25,13 @@ public class entradaInventario extends javax.swing.JFrame {
             String id = this.entryId.getText();
             String nombre = this.entryNombreProducto.getText();
             String cantidad = this.entryCantidadProducto.getText();
-            productos p = new productos();
+            Producto p = new Producto();
 
             p.setId(id);
             p.setNombre(nombre);
             p.setCantidad(cantidad);
 
-            ArrayProductos.productos.add(p);
+            Productos.productos.add(p);
             JOptionPane.showMessageDialog(this, "Producto registrado");
             //validar();
         } catch (Exception e) {
