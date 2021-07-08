@@ -10,6 +10,8 @@ import java.util.ArrayList;
 /**
  *
  * @author Jpadilla
+ * * @author AbelAbarca
+ * 
  */
 public class ArrayProductos {
    public static ArrayList<productos> productos= new ArrayList<productos>();
