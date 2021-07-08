@@ -9,8 +9,7 @@ import java.util.ArrayList;
 // Hola, este es mi primer comentario//
 /**
  *
- * @author Ana
- */
+
 public class ArrayProductos {
    public static ArrayList<productos> productos= new ArrayList<productos>();
     
