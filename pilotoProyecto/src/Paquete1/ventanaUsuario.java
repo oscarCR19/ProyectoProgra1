@@ -4,7 +4,7 @@ import javax.swing.JOptionPane;
 import java.lang.Object;
 import Paquete1.SuperUsuario;
 public class ventanaUsuario extends javax.swing.JFrame {
-
+////Aqui mostramos los usuarios y contraseñas de los puntos de venta,recepcion y planta
     private String contra0 = "0";
     private String contra1 = "admin1";
     private String contra2 = "admin2";
