@@ -7,7 +7,7 @@ package Paquete1;
 
 /**
  *
- * @author oscar
+ * @author Jpadilla
  */
 public class productos {
 
