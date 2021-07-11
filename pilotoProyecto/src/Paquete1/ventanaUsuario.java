@@ -23,6 +23,7 @@ public class ventanaUsuario extends javax.swing.JFrame {
 
     public ventanaUsuario() {
         initComponents();
+        this.setLocationRelativeTo(null);
 
     }
 
