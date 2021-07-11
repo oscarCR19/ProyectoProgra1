@@ -38,6 +38,7 @@ public class ventanaUsuario extends javax.swing.JFrame {
         labelcontraseña = new javax.swing.JLabel();
         introContrasena = new javax.swing.JPasswordField();
         botonEntrarusuario = new javax.swing.JButton();
+        BotonSalirUsuario = new javax.swing.JButton();
         labelAcceso = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
 
@@ -49,6 +50,7 @@ public class ventanaUsuario extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTextArea1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         setPreferredSize(new java.awt.Dimension(800, 600));
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 255));
@@ -81,6 +83,13 @@ public class ventanaUsuario extends javax.swing.JFrame {
             }
         });
 
+        BotonSalirUsuario.setText("Salir");
+        BotonSalirUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonSalirUsuarioActionPerformed(evt);
+            }
+        });
+
         labelAcceso.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
         labelAcceso.setText("Sistema de inventario carnicerias el chirriche ");
 
@@ -104,6 +113,8 @@ public class ventanaUsuario extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(BotonSalirUsuario)
+                .addGap(18, 18, 18)
                 .addComponent(botonEntrarusuario)
                 .addGap(346, 346, 346))
         );
@@ -121,8 +132,10 @@ public class ventanaUsuario extends javax.swing.JFrame {
                     .addComponent(labelcontraseña)
                     .addComponent(introContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
-                .addComponent(botonEntrarusuario)
-                .addContainerGap(190, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botonEntrarusuario)
+                    .addComponent(BotonSalirUsuario))
+                .addContainerGap(296, Short.MAX_VALUE))
         );
 
         setJMenuBar(jMenuBar1);
@@ -135,7 +148,7 @@ public class ventanaUsuario extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 498, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 598, Short.MAX_VALUE)
         );
 
         pack();
@@ -210,6 +223,10 @@ public class ventanaUsuario extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_introUsuarioActionPerformed
 
+    private void BotonSalirUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonSalirUsuarioActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_BotonSalirUsuarioActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -247,6 +264,7 @@ public class ventanaUsuario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BotonSalirUsuario;
     private javax.swing.JButton botonEntrarusuario;
     private javax.swing.JPasswordField introContrasena;
     private javax.swing.JTextField introUsuario;
