@@ -3,8 +3,10 @@ package Paquete1;
 import javax.swing.JOptionPane;
 import java.lang.Object;
 import Paquete1.SuperUsuario;
+
 public class ventanaUsuario extends javax.swing.JFrame {
 ////Aqui mostramos los usuarios y contraseñas de los puntos de venta,recepcion y planta
+
     private String contra0 = "0";
     private String contra1 = "admin1";
     private String contra2 = "admin2";
@@ -52,7 +54,6 @@ public class ventanaUsuario extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(800, 600));
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 255));
         jPanel1.setMaximumSize(new java.awt.Dimension(800, 600));
@@ -77,6 +78,7 @@ public class ventanaUsuario extends javax.swing.JFrame {
             }
         });
 
+        botonEntrarusuario.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         botonEntrarusuario.setText("Entrar");
         botonEntrarusuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,6 +86,7 @@ public class ventanaUsuario extends javax.swing.JFrame {
             }
         });
 
+        BotonSalirUsuario.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         BotonSalirUsuario.setText("Salir");
         BotonSalirUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -99,25 +102,26 @@ public class ventanaUsuario extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 186, Short.MAX_VALUE)
+                .addGap(0, 184, Short.MAX_VALUE)
                 .addComponent(labelAcceso)
                 .addGap(162, 162, 162))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(265, 265, 265)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(labelcontraseña)
                     .addComponent(labelUsuario))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(introUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(introContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(BotonSalirUsuario)
                 .addGap(18, 18, 18)
-                .addComponent(botonEntrarusuario)
-                .addGap(346, 346, 346))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(botonEntrarusuario)
+                        .addGap(18, 18, 18)
+                        .addComponent(BotonSalirUsuario))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(introUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(introContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(36, 36, 36)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,16 +131,16 @@ public class ventanaUsuario extends javax.swing.JFrame {
                 .addGap(67, 67, 67)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelUsuario)
-                    .addComponent(introUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(introUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelcontraseña)
-                    .addComponent(introContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
+                    .addComponent(introContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonEntrarusuario)
                     .addComponent(BotonSalirUsuario))
-                .addContainerGap(296, Short.MAX_VALUE))
+                .addContainerGap(285, Short.MAX_VALUE))
         );
 
         setJMenuBar(jMenuBar1);
@@ -162,63 +166,54 @@ public class ventanaUsuario extends javax.swing.JFrame {
 
     private void botonEntrarusuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEntrarusuarioActionPerformed
         SuperUsuario ventana = new SuperUsuario();
-        CarniceriaPuriscalUno ventana2= new CarniceriaPuriscalUno();
-        CarniceriaPuriscalDos ventana3= new CarniceriaPuriscalDos();
-        CarniceriaCiudadColon ventana4=new CarniceriaCiudadColon();
-        CarniceriaSantaAna ventana5=new CarniceriaSantaAna();
-        CarniceriaEscazu ventana6=new CarniceriaEscazu();
-        RecepPlanta ventana7=new RecepPlanta();
-        
+        CarniceriaPuriscalUno ventana2 = new CarniceriaPuriscalUno();
+        CarniceriaPuriscalDos ventana3 = new CarniceriaPuriscalDos();
+        CarniceriaCiudadColon ventana4 = new CarniceriaCiudadColon();
+        CarniceriaSantaAna ventana5 = new CarniceriaSantaAna();
+        CarniceriaEscazu ventana6 = new CarniceriaEscazu();
+        RecepPlanta ventana7 = new RecepPlanta();
+
         String usuario = this.introUsuario.getText();
         String contra = String.valueOf(this.introContrasena.getPassword());
-        
-        
+
         if (usuario.equals(this.usuario0) || usuario.equals(this.usuario1) || usuario.equals(this.usuario2)
                 || usuario.equals(this.usuario3) || usuario.equals(this.usuario4) || usuario.equals(this.usuario5)
                 || usuario.equals(this.usuario6)) {
 
-            if (usuario.equals(this.usuario0)&&contra.equals(this.contra0)) {
+            if (usuario.equals(this.usuario0) && contra.equals(this.contra0)) {
                 ventana.setVisible(true);
                 this.setVisible(false);
-            } else if (usuario.equals(this.usuario1)&&contra.equals(this.contra1)) {
+            } else if (usuario.equals(this.usuario1) && contra.equals(this.contra1)) {
                 ventana2.setVisible(true);
                 this.setVisible(false);
-            } 
-            else if (usuario.equals(this.usuario2)&&contra.equals(this.contra2)) {
+            } else if (usuario.equals(this.usuario2) && contra.equals(this.contra2)) {
                 ventana3.setVisible(true);
                 this.setVisible(false);
-            } 
-            else if (usuario.equals(this.usuario3)&&contra.equals(this.contra3)) {
+            } else if (usuario.equals(this.usuario3) && contra.equals(this.contra3)) {
                 ventana4.setVisible(true);
                 this.setVisible(false);
-            } 
-            else if (usuario.equals(this.usuario4)&&contra.equals(this.contra4)) {
+            } else if (usuario.equals(this.usuario4) && contra.equals(this.contra4)) {
                 ventana5.setVisible(true);
                 this.setVisible(false);
-            } 
-            else if (usuario.equals(this.usuario5)&&contra.equals(this.contra5)) {
+            } else if (usuario.equals(this.usuario5) && contra.equals(this.contra5)) {
                 ventana6.setVisible(true);
                 this.setVisible(false);
-            } 
-            else if (usuario.equals(this.usuario6)&&contra.equals(this.contra6)) {
+            } else if (usuario.equals(this.usuario6) && contra.equals(this.contra6)) {
                 ventana7.setVisible(true);
                 this.setVisible(false);
             }
 
         }
 
-        
 
-        
     }//GEN-LAST:event_botonEntrarusuarioActionPerformed
 
-    public String usuarioGlobal(){
-        String usuarioGlobal=this.introUsuario.getText();
+    public String usuarioGlobal() {
+        String usuarioGlobal = this.introUsuario.getText();
         return usuarioGlobal;
-    
+
     }
 
-    
 
     private void introUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_introUsuarioActionPerformed
         // TODO add your handling code here:

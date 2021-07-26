@@ -7,7 +7,6 @@ package Paquete1;
 
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import Paquete1.CarniceriaPuriscalUno;
 
 public class entradaInventario extends javax.swing.JFrame {
 
@@ -22,29 +21,41 @@ public class entradaInventario extends javax.swing.JFrame {
     public void agregar() {
 
         try {
-            String id = this.entryId.getText();
-            String nombre = this.entryNombreProducto.getText();
-            String cantidad = this.entryCantidadProducto.getText();
-            Producto p = new Producto();
+            producto p = new producto();
 
-            p.setId(id);
+            String id = this.textFieldid.getText();
+            String nombre = this.textFieldnombre.getText();
+            String cantidad = this.textFieldcantidad.getText();
+
+            if (this.textFieldid.getText().isEmpty() && this.textFieldnombre.getText().isEmpty() && this.textFieldcantidad.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(rootPane, "Verifique los campos que se le solicitan");
+                return;
+            }
+            for (int i = 0; i < productos.arrayProductos.size(); i++) {
+                if (String.valueOf(productos.arrayProductos.get(i).getId()).equals(this.textFieldid.getText())
+                        || String.valueOf(productos.arrayProductos.get(i).getNombre()).equals(this.textFieldnombre.getText())) {
+                    JOptionPane.showMessageDialog(rootPane, "Los datos Id o nombre ya se encuantran en inventario");
+                    return;
+                }
+
+            }
+            p.setId(Integer.parseInt(this.textFieldid.getText()));
             p.setNombre(nombre);
-            p.setCantidad(cantidad);
-
-            Productos.productos.add(p);
+            p.setCantidad(Double.parseDouble(this.textFieldcantidad.getText()));
+            productos.arrayProductos.add(p);
             JOptionPane.showMessageDialog(this, "Producto registrado");
-            //validar();
+
         } catch (Exception e) {
-            System.out.println(e);
+            JOptionPane.showMessageDialog(rootPane, "Error en los datos brindados.");
         }
+        
     }
 
-    public void validar() {
-        
-        }
-        
-
-    
+    public void limpiarCampos() {
+        this.textFieldid.setText("");
+        this.textFieldnombre.setText("");
+        this.textFieldcantidad.setText("");
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -56,12 +67,12 @@ public class entradaInventario extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        entryId = new javax.swing.JTextField();
-        entryNombreProducto = new javax.swing.JTextField();
-        entryCantidadProducto = new javax.swing.JTextField();
+        textFieldid = new javax.swing.JTextField();
+        textFieldnombre = new javax.swing.JTextField();
+        textFieldcantidad = new javax.swing.JTextField();
         botonAgregar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 255));
@@ -72,12 +83,16 @@ public class entradaInventario extends javax.swing.JFrame {
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logochirriche.png"))); // NOI18N
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel3.setText("Id producto");
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel4.setText("Nombre producto");
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel5.setText("Cantidad producto");
 
+        botonAgregar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         botonAgregar.setText("Agregar");
         botonAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -90,56 +105,55 @@ public class entradaInventario extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(280, 280, 280)
-                .addComponent(jLabel1)
-                .addGap(0, 509, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(55, 55, 55)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel4)
+                        .addGap(76, 76, 76)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(17, 17, 17)
-                                .addComponent(jLabel3)))
-                        .addGap(39, 39, 39)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(entryId)
-                            .addComponent(entryNombreProducto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
-                            .addComponent(entryCantidadProducto, javax.swing.GroupLayout.Alignment.TRAILING)))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel3))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(textFieldid)
+                                    .addComponent(textFieldnombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
+                                    .addComponent(textFieldcantidad, javax.swing.GroupLayout.Alignment.TRAILING)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(3, 3, 3)
+                                .addComponent(jLabel1))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(241, 241, 241)
+                        .addGap(237, 237, 237)
                         .addComponent(botonAgregar)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(294, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jLabel1)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(80, 80, 80)
+                        .addGap(123, 123, 123)
                         .addComponent(jLabel2))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(127, 127, 127)
+                        .addGap(37, 37, 37)
+                        .addComponent(jLabel1)
+                        .addGap(111, 111, 111)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(entryId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(textFieldid, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3))
                         .addGap(28, 28, 28)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(entryNombreProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(textFieldnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4))
-                        .addGap(37, 37, 37)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(entryCantidadProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(textFieldcantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5))
-                        .addGap(32, 32, 32)
+                        .addGap(26, 26, 26)
                         .addComponent(botonAgregar)))
-                .addContainerGap(186, Short.MAX_VALUE))
+                .addContainerGap(191, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -159,14 +173,11 @@ public class entradaInventario extends javax.swing.JFrame {
 
     private void botonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarActionPerformed
         agregar();
-        this.setVisible(false);
+        limpiarCampos();
 
 
     }//GEN-LAST:event_botonAgregarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -209,14 +220,14 @@ public class entradaInventario extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonAgregar;
-    private javax.swing.JTextField entryCantidadProducto;
-    private javax.swing.JTextField entryId;
-    private javax.swing.JTextField entryNombreProducto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField textFieldcantidad;
+    private javax.swing.JTextField textFieldid;
+    private javax.swing.JTextField textFieldnombre;
     // End of variables declaration//GEN-END:variables
 }

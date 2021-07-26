@@ -9,12 +9,12 @@ import java.util.ArrayList;
 // Hola, este es mi primer comentario//
 /**
  *
-<<<<<<< HEAD:pilotoProyecto/src/Paquete1/Productos.java
+<<<<<<< HEAD:pilotoProyecto/src/Paquete1/productos.java
  * @author oscar
  */
 // Se mejoró los nombres de las clases para mayor endendimiento
-public class Productos {
-   public static ArrayList<Producto> productos= new ArrayList<Producto>();
+public class productos {
+   public static ArrayList<producto> arrayProductos= new ArrayList<producto>();
 
 
 

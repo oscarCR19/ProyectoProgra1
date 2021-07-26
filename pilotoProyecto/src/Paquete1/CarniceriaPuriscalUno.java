@@ -9,7 +9,7 @@ import java.util.GregorianCalendar;
 import javax.swing.table.DefaultTableModel;
 
 public class CarniceriaPuriscalUno extends javax.swing.JFrame {
-    DefaultTableModel t=new DefaultTableModel();
+    
     GregorianCalendar fecha= new GregorianCalendar();
     
     String ano= Integer.toString(fecha.get(Calendar.YEAR));
@@ -25,26 +25,23 @@ public class CarniceriaPuriscalUno extends javax.swing.JFrame {
     public String resultadohora= hora+":"+min;
     
     
-    
+    DefaultTableModel TablaPuriscalUno;
     
     public CarniceriaPuriscalUno() {
         initComponents();
-        tabla1.setModel(t);
-        t.addColumn("Id");
-        t.addColumn("Nombre");
-        t.addColumn("Cantidad");
+        this.TablaPuriscalUno=(DefaultTableModel) this.tablaCarniceria1.getModel();
           
             
         
         
     }
-     public void cargar(){
-         t.setRowCount(0);
-        for (int i=0;i<Productos.productos.size();i++){
-            t.addRow(new Object[]{
-             Productos.productos.get(i).getId(),
-              Productos.productos.get(i).getNombre(),  
-              Productos.productos.get(i).getCantidad(),  
+     public void cargarTabla(){
+        
+        for (int i=0;i<productos.arrayProductos.size();i++){
+            this.TablaPuriscalUno.addRow(new Object[]{
+             productos.arrayProductos.get(i).getId(),
+              productos.arrayProductos.get(i).getNombre(),  
+              productos.arrayProductos.get(i).getCantidad(),  
                 
             });
         }
@@ -76,12 +73,12 @@ public class CarniceriaPuriscalUno extends javax.swing.JFrame {
         labelHora = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         botonActualizarInvent = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tabla1 = new javax.swing.JTable();
         botonagregarInventario = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaCarniceria1 = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1000, 600));
         setResizable(false);
 
@@ -90,7 +87,7 @@ public class CarniceriaPuriscalUno extends javax.swing.JFrame {
         jPanel1.setMinimumSize(new java.awt.Dimension(1000, 600));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        jLabel2.setText("Bienvenidos a Puriscal 1");
+        jLabel2.setText("Bienvenidos a Puriscal Uno");
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logochirriche.png"))); // NOI18N
 
@@ -106,6 +103,7 @@ public class CarniceriaPuriscalUno extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel5.setText("Inventario");
 
+        botonActualizarInvent.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         botonActualizarInvent.setText("Actualizar");
         botonActualizarInvent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -113,19 +111,7 @@ public class CarniceriaPuriscalUno extends javax.swing.JFrame {
             }
         });
 
-        tabla1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
-            }
-        ));
-        jScrollPane2.setViewportView(tabla1);
-
+        botonagregarInventario.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         botonagregarInventario.setText("Agregar");
         botonagregarInventario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -133,79 +119,86 @@ public class CarniceriaPuriscalUno extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("jButton1");
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jButton1.setText("Borrar");
+
+        tablaCarniceria1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Id", "Nombre", "Cantidad"
+            }
+        ));
+        jScrollPane1.setViewportView(tablaCarniceria1);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel3)
-                .addGap(268, 268, 268)
-                .addComponent(jLabel5)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addContainerGap(606, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(labelHora, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel3)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(labelFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(264, 264, 264)
+                                        .addComponent(jLabel5))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(68, 68, 68)
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(labelFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(labelHora, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(199, 199, 199))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(botonagregarInventario)
-                                .addGap(44, 44, 44)
-                                .addComponent(jButton1)
-                                .addGap(32, 32, 32)
-                                .addComponent(botonActualizarInvent)
-                                .addGap(238, 238, 238))))))
+                        .addGap(423, 423, 423)
+                        .addComponent(botonagregarInventario)
+                        .addGap(39, 39, 39)
+                        .addComponent(jButton1)
+                        .addGap(39, 39, 39)
+                        .addComponent(botonActualizarInvent)))
+                .addContainerGap(207, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addGap(20, 20, 20)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(8, 8, 8)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
                         .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(labelFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(77, 77, 77))
+                            .addComponent(labelHora, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(19, 19, 19)
-                                .addComponent(labelFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(11, 11, 11)
-                                .addComponent(labelHora, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 56, Short.MAX_VALUE)
+                                .addComponent(jLabel4)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel1)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel5)
-                        .addGap(26, 26, 26)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(botonActualizarInvent)
-                            .addComponent(botonagregarInventario)
-                            .addComponent(jButton1))
-                        .addGap(117, 117, 117))))
+                        .addGap(31, 31, 31)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botonagregarInventario)
+                    .addComponent(jButton1)
+                    .addComponent(botonActualizarInvent))
+                .addGap(110, 110, 110))
         );
 
         labelFecha.setText(this.resultadoFecha);
@@ -215,7 +208,7 @@ public class CarniceriaPuriscalUno extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -231,7 +224,7 @@ public class CarniceriaPuriscalUno extends javax.swing.JFrame {
     }//GEN-LAST:event_botonagregarInventarioActionPerformed
 
     private void botonActualizarInventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonActualizarInventActionPerformed
-        cargar();
+        cargarTabla();
     }//GEN-LAST:event_botonActualizarInventActionPerformed
 
     
@@ -286,9 +279,9 @@ public class CarniceriaPuriscalUno extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelFecha;
     private javax.swing.JLabel labelHora;
-    private javax.swing.JTable tabla1;
+    private javax.swing.JTable tablaCarniceria1;
     // End of variables declaration//GEN-END:variables
 }
