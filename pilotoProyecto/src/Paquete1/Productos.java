@@ -6,17 +6,11 @@
 package Paquete1;
 
 import java.util.ArrayList;
-// Hola, este es mi primer comentario//
+
 /**
  *
-<<<<<<< HEAD:pilotoProyecto/src/Paquete1/productos.java
  * @author oscar
  */
-// Se mejoró los nombres de las clases para mayor endendimiento
 public class productos {
-   public static ArrayList<producto> arrayProductos= new ArrayList<producto>();
-
-
-
-    
+    public static ArrayList<producto> arrayProductos= new ArrayList<producto>();
 }

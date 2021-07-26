@@ -7,6 +7,7 @@ package Paquete1;
 
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import Paquete1.CarniceriaPuriscalUno;
 
 public class entradaInventario extends javax.swing.JFrame {
 
@@ -48,7 +49,7 @@ public class entradaInventario extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, "Error en los datos brindados.");
         }
-        
+
     }
 
     public void limpiarCampos() {
@@ -174,6 +175,7 @@ public class entradaInventario extends javax.swing.JFrame {
     private void botonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarActionPerformed
         agregar();
         limpiarCampos();
+        System.out.println(productos.arrayProductos.size());
 
 
     }//GEN-LAST:event_botonAgregarActionPerformed

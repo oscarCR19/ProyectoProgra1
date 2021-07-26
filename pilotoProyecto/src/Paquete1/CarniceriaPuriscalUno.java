@@ -35,7 +35,7 @@ public class CarniceriaPuriscalUno extends javax.swing.JFrame {
         
         
     }
-     public void cargarTabla(){
+     public  void cargarTabla(){
         
         for (int i=0;i<productos.arrayProductos.size();i++){
             this.TablaPuriscalUno.addRow(new Object[]{
@@ -224,7 +224,9 @@ public class CarniceriaPuriscalUno extends javax.swing.JFrame {
     }//GEN-LAST:event_botonagregarInventarioActionPerformed
 
     private void botonActualizarInventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonActualizarInventActionPerformed
-        cargarTabla();
+        
+       cargarTabla();
+        
     }//GEN-LAST:event_botonActualizarInventActionPerformed
 
     
