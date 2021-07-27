@@ -8,15 +8,15 @@ package Paquete1;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import Paquete1.CarniceriaPuriscalUno;
+import javax.swing.table.DefaultTableModel;
 
 public class entradaInventario extends javax.swing.JFrame {
 
-    /**
-     * Creates new form validacionInventario
-     */
+    DefaultTableModel tInventarioCentral;
     public entradaInventario() {
         initComponents();
-
+      this.tInventarioCentral=(DefaultTableModel) this.tablaInventarioCentral.getModel();
+      cargarTabla();
     }
 
     public void agregar() {
@@ -26,9 +26,8 @@ public class entradaInventario extends javax.swing.JFrame {
 
             String id = this.textFieldid.getText();
             String nombre = this.textFieldnombre.getText();
-            String cantidad = this.textFieldcantidad.getText();
-
-            if (this.textFieldid.getText().isEmpty() && this.textFieldnombre.getText().isEmpty() && this.textFieldcantidad.getText().isEmpty()) {
+            
+            if (this.textFieldid.getText().isEmpty() && this.textFieldnombre.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(rootPane, "Verifique los campos que se le solicitan");
                 return;
             }
@@ -42,8 +41,12 @@ public class entradaInventario extends javax.swing.JFrame {
             }
             p.setId(Integer.parseInt(this.textFieldid.getText()));
             p.setNombre(nombre);
-            p.setCantidad(Double.parseDouble(this.textFieldcantidad.getText()));
+            
             productos.arrayProductos.add(p);
+            this.tInventarioCentral.addRow(new Object[]{p.getId(),p.getNombre()});
+                
+                
+                
             JOptionPane.showMessageDialog(this, "Producto registrado");
 
         } catch (Exception e) {
@@ -55,8 +58,22 @@ public class entradaInventario extends javax.swing.JFrame {
     public void limpiarCampos() {
         this.textFieldid.setText("");
         this.textFieldnombre.setText("");
-        this.textFieldcantidad.setText("");
+       
     }
+    
+    public void cargarTabla() {
+        for (int i = 0; i < productos.arrayProductos.size(); i++) {
+            this.tInventarioCentral.addRow(new Object[]{
+                productos.arrayProductos.get(i).getId(),
+                productos.arrayProductos.get(i).getNombre(),
+                productos.arrayProductos.get(i).getCantidad(),});
+        }
+
+    }
+    
+    
+    
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -67,11 +84,13 @@ public class entradaInventario extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         textFieldid = new javax.swing.JTextField();
         textFieldnombre = new javax.swing.JTextField();
-        textFieldcantidad = new javax.swing.JTextField();
         botonAgregar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaInventarioCentral = new javax.swing.JTable();
+        botonActualizar = new javax.swing.JButton();
+        botonBorrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -90,14 +109,37 @@ public class entradaInventario extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel4.setText("Nombre producto");
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel5.setText("Cantidad producto");
-
-        botonAgregar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        botonAgregar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         botonAgregar.setText("Agregar");
         botonAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonAgregarActionPerformed(evt);
+            }
+        });
+
+        tablaInventarioCentral.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Id", "Nombre"
+            }
+        ));
+        jScrollPane1.setViewportView(tablaInventarioCentral);
+
+        botonActualizar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        botonActualizar.setText("Actualizar");
+        botonActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonActualizarActionPerformed(evt);
+            }
+        });
+
+        botonBorrar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        botonBorrar.setText("Borrar");
+        botonBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonBorrarActionPerformed(evt);
             }
         });
 
@@ -107,54 +149,69 @@ public class entradaInventario extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(botonActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(83, 83, 83)
+                        .addComponent(botonBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(175, 175, 175))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(76, 76, 76)
+                        .addComponent(jLabel2)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel3))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(textFieldid)
-                                    .addComponent(textFieldnombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
-                                    .addComponent(textFieldcantidad, javax.swing.GroupLayout.Alignment.TRAILING)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(3, 3, 3)
-                                .addComponent(jLabel1))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(237, 237, 237)
-                        .addComponent(botonAgregar)))
-                .addContainerGap(294, Short.MAX_VALUE))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(79, 79, 79)
+                                        .addComponent(jLabel1))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(44, 44, 44)
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 555, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGap(136, 136, 136)
+                                                .addComponent(jLabel4))
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGap(166, 166, 166)
+                                                .addComponent(jLabel3)))
+                                        .addGap(45, 45, 45)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(textFieldid, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(textFieldnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addContainerGap(60, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(botonAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(255, 255, 255))))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(123, 123, 123)
-                        .addComponent(jLabel2))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGap(37, 37, 37)
                         .addComponent(jLabel1)
-                        .addGap(111, 111, 111)
+                        .addGap(85, 85, 85)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(textFieldid, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
-                        .addGap(28, 28, 28)
+                            .addComponent(jLabel3)
+                            .addComponent(textFieldid, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(17, 17, 17)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(textFieldnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
-                        .addGap(29, 29, 29)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(textFieldcantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5))
-                        .addGap(26, 26, 26)
-                        .addComponent(botonAgregar)))
-                .addContainerGap(191, Short.MAX_VALUE))
+                            .addComponent(jLabel4)
+                            .addComponent(textFieldnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(botonAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGap(123, 123, 123)
+                        .addComponent(jLabel2)))
+                .addGap(10, 10, 10)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botonActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(42, 42, 42))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -175,11 +232,49 @@ public class entradaInventario extends javax.swing.JFrame {
     private void botonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarActionPerformed
         agregar();
         limpiarCampos();
-        System.out.println(productos.arrayProductos.size());
+        
 
 
     }//GEN-LAST:event_botonAgregarActionPerformed
 
+    private void botonBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBorrarActionPerformed
+       try {
+            int p = this.tablaInventarioCentral.getSelectedRow();
+            if (p >= 0) {
+                productos.arrayProductos.remove(p);
+                indice(p);
+                JOptionPane.showMessageDialog(rootPane, "Producto borrardo con éxito");
+
+            } else {
+                indice(-1);
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, "No se encontraron elementos para borrar");
+
+        }
+    }//GEN-LAST:event_botonBorrarActionPerformed
+    
+    
+    Integer indice=null;// este indice es una variable global de tipo integer para despues basarse en ella para actualizar la tabla
+    public int indice(int numero) {
+        this.indice = numero;/// aqui esta su respectivo método
+        return indice;
+    }
+    
+    
+    
+    
+    private void botonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonActualizarActionPerformed
+        try{
+            this.tInventarioCentral.removeRow(indice);
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(rootPane, "No hay datos para actualizar");
+        }
+    }//GEN-LAST:event_botonActualizarActionPerformed
+    
+    
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -221,14 +316,16 @@ public class entradaInventario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonActualizar;
     private javax.swing.JButton botonAgregar;
+    private javax.swing.JButton botonBorrar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField textFieldcantidad;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tablaInventarioCentral;
     private javax.swing.JTextField textFieldid;
     private javax.swing.JTextField textFieldnombre;
     // End of variables declaration//GEN-END:variables
