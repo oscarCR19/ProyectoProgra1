@@ -9,45 +9,54 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import Modelos.Carniceria;
+import java.awt.Color;
 
-public class CarniceriaPuriscalUno extends javax.swing.JFrame {
-    
+public class CarniceriaMain extends javax.swing.JFrame {
+
     GregorianCalendar fecha = new GregorianCalendar();
-    
+
     String ano = Integer.toString(fecha.get(Calendar.YEAR));
     String mes = Integer.toString(fecha.get(Calendar.MONTH));
     String dia = Integer.toString(fecha.get(Calendar.DATE));
-    
+
     String hora = Integer.toString(fecha.get(Calendar.HOUR_OF_DAY));
     String min = Integer.toString(fecha.get(Calendar.MINUTE));
-    
+
     public String resultadoFecha = dia + "-" + mes + "-" + ano;
-    
+
     public String resultadohora = hora + ":" + min;
-    
-    DefaultTableModel TablaPuriscalUno;
-    
-    public CarniceriaPuriscalUno() {
+
+    DefaultTableModel ModelotablaGenerico;
+    private Carniceria carniceria;
+
+    public CarniceriaMain(Carniceria carniceria) {
         initComponents();
-        this.TablaPuriscalUno = (DefaultTableModel) this.tablaCarniceria1.getModel();
+        this.ModelotablaGenerico = (DefaultTableModel) this.tablaInventario.getModel();
         llenarCombobox();
+
+        if (carniceria == null) {
+            return;
+        }
+        this.carniceria = carniceria;
+        this.lblTitulo.setText("Bienvenido a " + carniceria.getNombre());
         cargarTabla();
-        
+
     }
-    
+
     public void cargarTabla() {
         try {
-            for (int i = 0; i < productos.arrayProductos.size(); i++) {
-                this.TablaPuriscalUno.addRow(new Object[]{
-                    productos.arrayPuriscaluno.get(i).getId(),
-                    productos.arrayPuriscaluno.get(i).getNombre(),
-                    productos.arrayPuriscaluno.get(i).getCantidad()});
+            for (int i = 0; i < carniceria.getInventario().size(); i++) {
+                this.ModelotablaGenerico.addRow(new Object[]{
+                    carniceria.getInventario().get(i).getId(),
+                    carniceria.getInventario().get(i).getNombre(),
+                    carniceria.getInventario().get(i).getCantidad()});
             }
-            
+
         } catch (Exception e) {
-            
+
         }
-        
+
     }
 
     public void Agregar() {
@@ -57,27 +66,24 @@ public class CarniceriaPuriscalUno extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(rootPane, "Falta seleccionar la cantidad");
                 return;
             }
-            for (int i = 0; i < productos.arrayPuriscaluno.size(); i++) {
-                if (String.valueOf(productos.arrayPuriscaluno.get(i).getNombre()).equals(this.comboBoxProductos.getSelectedItem())) {
+            for (int i = 0; i < carniceria.getInventario().size(); i++) {
+                if (String.valueOf(carniceria.getInventario().get(i).getNombre()).equals(this.comboBoxProductos.getSelectedItem())) {
                     JOptionPane.showMessageDialog(rootPane, "Producto ya se encuentra en el inventario");
                     return;
                 }
             }
             p.setNombre(String.valueOf(this.comboBoxProductos.getSelectedItem()));
             p.setCantidad(Double.parseDouble(this.textFieldcantidad.getText()));
-            for (int i = 0; i < productos.arrayProductos.size(); i++) {
-                p.setId(productos.arrayProductos.get(this.comboBoxProductos.getSelectedIndex()).getId());
-                this.textFieldid.setText(String.valueOf(p.getId()));
-            }
-            productos.arrayPuriscaluno.add(p);
+
+            carniceria.getInventario().add(p);
             JOptionPane.showMessageDialog(rootPane, "Producto ingresado con éxito");
-            this.TablaPuriscalUno.addRow(new Object[]{p.getId(), p.getNombre(), p.getCantidad()});
+            this.ModelotablaGenerico.addRow(new Object[]{p.getId(), p.getNombre(), p.getCantidad()});
             borrar();
         } catch (Exception e) {
-            
+
         }
     }
-    
+
     public void llenarCombobox() {
         for (int i = 0; i < productos.arrayProductos.size(); i++) {
             this.comboBoxProductos.addItem(String.valueOf(productos.arrayProductos.get(i).getNombre()));
@@ -87,7 +93,7 @@ public class CarniceriaPuriscalUno extends javax.swing.JFrame {
     public void borrar() {
         this.textFieldcantidad.setText("");
         this.textFieldid.setText("");
-        
+
     }
 
     /**
@@ -100,7 +106,7 @@ public class CarniceriaPuriscalUno extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        lblTitulo = new javax.swing.JLabel();
         labelFecha = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -109,7 +115,7 @@ public class CarniceriaPuriscalUno extends javax.swing.JFrame {
         botonagregarInventario = new javax.swing.JButton();
         BotonBorrar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablaCarniceria1 = new javax.swing.JTable();
+        tablaInventario = new javax.swing.JTable();
         comboBoxProductos = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -127,8 +133,8 @@ public class CarniceriaPuriscalUno extends javax.swing.JFrame {
         jPanel1.setMaximumSize(new java.awt.Dimension(1000, 600));
         jPanel1.setMinimumSize(new java.awt.Dimension(1000, 600));
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        jLabel2.setText("Bienvenidos a Puriscal Uno");
+        lblTitulo.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        lblTitulo.setText("Bienvenidos a Puriscal Uno");
 
         labelFecha.setBackground(new java.awt.Color(255, 255, 255));
         labelFecha.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -163,8 +169,8 @@ public class CarniceriaPuriscalUno extends javax.swing.JFrame {
             }
         });
 
-        tablaCarniceria1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        tablaCarniceria1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaInventario.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        tablaInventario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -172,9 +178,14 @@ public class CarniceriaPuriscalUno extends javax.swing.JFrame {
                 "Id", "Nombre", "Cantidad"
             }
         ));
-        jScrollPane1.setViewportView(tablaCarniceria1);
+        jScrollPane1.setViewportView(tablaInventario);
 
         comboBoxProductos.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        comboBoxProductos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxProductosActionPerformed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel6.setText("Nombre");
@@ -197,80 +208,80 @@ public class CarniceriaPuriscalUno extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lblTitulo)
+                .addGap(284, 284, 284))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(363, 363, 363)
-                        .addComponent(jLabel2))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(labelHora, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(101, 101, 101)
+                        .addComponent(botonActualizarInvent, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(77, 77, 77)
+                        .addComponent(BotonBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(70, 70, 70)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(253, 253, 253)
+                        .addComponent(jLabel5))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(labelFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(botonagregarInventario, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(57, 57, 57)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(comboBoxProductos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(textFieldcantidad)
-                                    .addComponent(textFieldid, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(86, 86, 86)
-                        .addComponent(botonActualizarInvent, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
-                        .addComponent(BotonBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(192, 192, 192)
-                        .addComponent(jLabel5)))
-                .addContainerGap(484, Short.MAX_VALUE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(textFieldid, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel7)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(textFieldcantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(botonagregarInventario, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(comboBoxProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(labelFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(251, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 29, Short.MAX_VALUE)
+                        .addGap(0, 84, Short.MAX_VALUE)
                         .addComponent(jLabel5)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                        .addGap(11, 11, 11)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(127, 127, 127)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addGap(158, 158, 158))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(comboBoxProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(textFieldcantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel7))
-                                .addGap(20, 20, 20)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(textFieldid, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel8))
-                                .addGap(32, 32, 32)
-                                .addComponent(botonagregarInventario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap()
+                        .addComponent(lblTitulo)
+                        .addGap(119, 119, 119)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(comboBoxProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))
+                        .addGap(32, 32, 32)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(textFieldcantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7))
+                        .addGap(31, 31, 31)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(textFieldid, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8))
+                        .addGap(35, 35, 35)
+                        .addComponent(botonagregarInventario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonActualizarInvent, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BotonBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -299,7 +310,7 @@ public class CarniceriaPuriscalUno extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -311,23 +322,23 @@ public class CarniceriaPuriscalUno extends javax.swing.JFrame {
 
     private void botonagregarInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonagregarInventarioActionPerformed
         Agregar();
-        System.out.println(productos.arrayPuriscaluno.size());
+        
     }//GEN-LAST:event_botonagregarInventarioActionPerformed
 
     private void botonActualizarInventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonActualizarInventActionPerformed
-try{
-            this.TablaPuriscalUno.removeRow(indice);
-        }catch(Exception e){
+        try {
+            this.ModelotablaGenerico.removeRow(indice);
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, "No hay datos para actualizar");
-        }        
+        }
 
     }//GEN-LAST:event_botonActualizarInventActionPerformed
 
     private void BotonBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonBorrarActionPerformed
-try {
-            int p = this.tablaCarniceria1.getSelectedRow();
+        try {
+            int p = this.tablaInventario.getSelectedRow();
             if (p >= 0) {
-                productos.arrayPuriscaluno.remove(p);
+                carniceria.getInventario().remove(p);
                 indice(p);
                 JOptionPane.showMessageDialog(rootPane, "Producto borrardo con éxito");
 
@@ -338,21 +349,25 @@ try {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, "No se encontraron elementos para borrar");
 
-        }        
-
+        }
+           this.tablaInventario.setBackground(Color.red);
     }//GEN-LAST:event_BotonBorrarActionPerformed
 
-     Integer indice=null;// este indice es una variable global de tipo integer para despues basarse en ella para actualizar la tabla
+    private void comboBoxProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxProductosActionPerformed
+        producto p = new producto();
+        for (int i = 0; i < productos.arrayProductos.size(); i++) {
+            p.setId(productos.arrayProductos.get(this.comboBoxProductos.getSelectedIndex()).getId());
+            this.textFieldid.setText(String.valueOf(p.getId()));
+        }
+    }//GEN-LAST:event_comboBoxProductosActionPerformed
+
+    Integer indice = null;// este indice es una variable global de tipo integer para despues basarse en ella para actualizar la tabla
+
     public int indice(int numero) {
         this.indice = numero;/// aqui esta su respectivo método
         return indice;
     }
-    
-    
-    
-    
-    
-        
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -367,20 +382,21 @@ try {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CarniceriaPuriscalUno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CarniceriaMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CarniceriaPuriscalUno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CarniceriaMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CarniceriaPuriscalUno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CarniceriaMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CarniceriaPuriscalUno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CarniceriaMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CarniceriaPuriscalUno().setVisible(true);
+                new CarniceriaMain(null).setVisible(true);
             }
         });
     }
@@ -392,7 +408,6 @@ try {
     private javax.swing.JComboBox<String> comboBoxProductos;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -402,7 +417,8 @@ try {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelFecha;
     private javax.swing.JLabel labelHora;
-    private javax.swing.JTable tablaCarniceria1;
+    private javax.swing.JLabel lblTitulo;
+    private javax.swing.JTable tablaInventario;
     private javax.swing.JTextField textFieldcantidad;
     private javax.swing.JTextField textFieldid;
     // End of variables declaration//GEN-END:variables

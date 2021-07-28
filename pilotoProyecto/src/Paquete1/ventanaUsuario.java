@@ -3,6 +3,7 @@ package Paquete1;
 import javax.swing.JOptionPane;
 import java.lang.Object;
 import Paquete1.SuperUsuario;
+import Modelos.Carniceria;
 
 public class ventanaUsuario extends javax.swing.JFrame {
 ////Aqui mostramos los usuarios y contraseñas de los puntos de venta,recepcion y planta
@@ -165,48 +166,56 @@ public class ventanaUsuario extends javax.swing.JFrame {
 
 
     private void botonEntrarusuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEntrarusuarioActionPerformed
-        SuperUsuario ventana = new SuperUsuario();
-        CarniceriaPuriscalUno ventana2 = new CarniceriaPuriscalUno();
-        CarniceriaPuriscalDos ventana3 = new CarniceriaPuriscalDos();
-        CarniceriaCiudadColon ventana4 = new CarniceriaCiudadColon();
-        CarniceriaSantaAna ventana5 = new CarniceriaSantaAna();
-        CarniceriaEscazu ventana6 = new CarniceriaEscazu();
+
+        Carniceria carniceria = obtenerAccesoCarniceriaporUsuario();
+        if (carniceria != null) {
+            CarniceriaMain ventana2 = new CarniceriaMain(carniceria);
+            ventana2.setVisible(true);
+            this.setVisible(false);
+        }
+
         RecepPlanta ventana7 = new RecepPlanta();
 
-        String usuario = this.introUsuario.getText();
-        String contra = String.valueOf(this.introContrasena.getPassword());
 
+    }//GEN-LAST:event_botonEntrarusuarioActionPerformed
+    private Carniceria obtenerAccesoCarniceriaporUsuario() {
+        String usuario = this.introUsuario.getText();
+
+        String contra = String.valueOf(this.introContrasena.getPassword());
+        Carniceria carniceria = null;
         if (usuario.equals(this.usuario0) || usuario.equals(this.usuario1) || usuario.equals(this.usuario2)
                 || usuario.equals(this.usuario3) || usuario.equals(this.usuario4) || usuario.equals(this.usuario5)
                 || usuario.equals(this.usuario6)) {
 
             if (usuario.equals(this.usuario0) && contra.equals(this.contra0)) {
+                SuperUsuario ventana = new SuperUsuario();
                 ventana.setVisible(true);
                 this.setVisible(false);
             } else if (usuario.equals(this.usuario1) && contra.equals(this.contra1)) {
-                ventana2.setVisible(true);
-                this.setVisible(false);
+                carniceria = new Carniceria();
+                carniceria.setNombre("Puriscal Uno");
             } else if (usuario.equals(this.usuario2) && contra.equals(this.contra2)) {
-                ventana3.setVisible(true);
-                this.setVisible(false);
+                carniceria = new Carniceria();
+                carniceria.setNombre("Puriscal Dos");
+
             } else if (usuario.equals(this.usuario3) && contra.equals(this.contra3)) {
-                ventana4.setVisible(true);
-                this.setVisible(false);
+                carniceria = new Carniceria();
+                carniceria.setNombre("");
             } else if (usuario.equals(this.usuario4) && contra.equals(this.contra4)) {
-                ventana5.setVisible(true);
-                this.setVisible(false);
+                carniceria = new Carniceria();
+                carniceria.setNombre("");
             } else if (usuario.equals(this.usuario5) && contra.equals(this.contra5)) {
-                ventana6.setVisible(true);
-                this.setVisible(false);
+                carniceria = new Carniceria();
+                carniceria.setNombre("");
             } else if (usuario.equals(this.usuario6) && contra.equals(this.contra6)) {
-                ventana7.setVisible(true);
-                this.setVisible(false);
+                carniceria = new Carniceria();
+                carniceria.setNombre("");
             }
 
         }
+        return carniceria;
 
-
-    }//GEN-LAST:event_botonEntrarusuarioActionPerformed
+    }
 
     public String usuarioGlobal() {
         String usuarioGlobal = this.introUsuario.getText();

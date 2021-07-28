@@ -7,7 +7,7 @@ package Paquete1;
 
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import Paquete1.CarniceriaPuriscalUno;
+import Paquete1.CarniceriaMain;
 import javax.swing.table.DefaultTableModel;
 
 public class entradaInventario extends javax.swing.JFrame {
