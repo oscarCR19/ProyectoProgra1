@@ -19,6 +19,15 @@ public class producto {
         return id;
     }
 
+    public producto() {
+        
+    }
+    public producto(int id, String nombre, double cantidad) {
+        this.id = id;
+        this.nombre = nombre;
+        this.cantidad = cantidad;
+    }
+
     public void setId(int id) {
         this.id = id;
     }

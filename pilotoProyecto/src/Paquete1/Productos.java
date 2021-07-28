@@ -17,9 +17,7 @@ public class productos {
     
     public static ArrayList<producto> arrayProductos= new ArrayList<producto>();
     
-    //este siguiente array es de la carniceriapuriscal 1
     
-    public static ArrayList<producto> arrayPuriscaluno = new ArrayList<producto>();
     
     
     
