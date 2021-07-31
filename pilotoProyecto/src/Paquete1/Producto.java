@@ -9,17 +9,26 @@ package Paquete1;
  *
  * @author Jpadilla
  */
-public class Producto {
+public class producto {
 
-    String id;
+    int id;
     String nombre;
-    String cantidad;
+    double cantidad;
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public producto() {
+        
+    }
+    public producto(int id, String nombre, double cantidad) {
+        this.id = id;
+        this.nombre = nombre;
+        this.cantidad = cantidad;
+    }
+
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -31,12 +40,14 @@ public class Producto {
         this.nombre = nombre;
     }
 
-    public String getCantidad() {
+    public double getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(String cantidad) {
+    public void setCantidad(double cantidad) {
         this.cantidad = cantidad;
     }
+
+    
 
 }

@@ -6,17 +6,20 @@
 package Paquete1;
 
 import java.util.ArrayList;
-// Hola, este es mi primer comentario//
+
 /**
  *
-<<<<<<< HEAD:pilotoProyecto/src/Paquete1/Productos.java
  * @author oscar
  */
-// Se mejoró los nombres de las clases para mayor endendimiento
-public class Productos {
-   public static ArrayList<Producto> productos= new ArrayList<Producto>();
-
-
-
+public class productos {
+    //OJO//////////////////////////Este array es para almacenar la minibase de datos que alimenta todo el sistema
+    //y va a ser la que se llena desde el superusuario, con la class entrada inventario
+    
+    public static ArrayList<producto> arrayProductos= new ArrayList<producto>();
+    
+    
+    
+    
+    
     
 }
