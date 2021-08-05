@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Modelos.Carniceria;
 import java.awt.Color;
+import java.awt.HeadlessException;
 
 public class CarniceriaMain extends javax.swing.JFrame {
 
@@ -79,7 +80,7 @@ public class CarniceriaMain extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Producto ingresado con éxito");
             this.ModelotablaGenerico.addRow(new Object[]{p.getId(), p.getNombre(), p.getCantidad()});
             borrar();
-        } catch (Exception e) {
+        } catch (HeadlessException | NumberFormatException e) {
 
         }
     }
@@ -346,7 +347,7 @@ public class CarniceriaMain extends javax.swing.JFrame {
                 indice(-1);
             }
 
-        } catch (Exception e) {
+        } catch (HeadlessException e) {
             JOptionPane.showMessageDialog(rootPane, "No se encontraron elementos para borrar");
 
         }
@@ -355,7 +356,7 @@ public class CarniceriaMain extends javax.swing.JFrame {
 
     private void comboBoxProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxProductosActionPerformed
         producto p = new producto();
-        for (int i = 0; i < productos.arrayProductos.size(); i++) {
+        for (producto arrayProducto : productos.arrayProductos) {
             p.setId(productos.arrayProductos.get(this.comboBoxProductos.getSelectedIndex()).getId());
             this.textFieldid.setText(String.valueOf(p.getId()));
         }
@@ -395,6 +396,7 @@ public class CarniceriaMain extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new CarniceriaMain(null).setVisible(true);
             }

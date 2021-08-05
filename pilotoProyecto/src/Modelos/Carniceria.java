@@ -15,7 +15,7 @@ public class Carniceria {
     }
 
     public Carniceria() {
-        inventario=new ArrayList<producto>();
+        inventario=new ArrayList<>();
     }
     public String getNombre() {
         return nombre;
