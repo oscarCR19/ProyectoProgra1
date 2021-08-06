@@ -262,6 +262,7 @@ public class ventanaUsuario extends javax.swing.JFrame {
         //</editor-fold>
 
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new ventanaUsuario().setVisible(true);
             }
