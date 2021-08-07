@@ -11,7 +11,11 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Modelos.Carniceria;
 import java.awt.Color;
+
 import java.awt.HeadlessException;
+
+
+import Paquete1.Conexion;
 
 public class CarniceriaMain extends javax.swing.JFrame {
 
@@ -61,8 +65,9 @@ public class CarniceriaMain extends javax.swing.JFrame {
     }
 
     public void Agregar() {
+        Conexion c= new Conexion();
         try {
-            producto p = new producto();
+            Producto p = new Producto();
             if (this.textFieldcantidad.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(rootPane, "Falta seleccionar la cantidad");
                 return;
@@ -75,7 +80,7 @@ public class CarniceriaMain extends javax.swing.JFrame {
             }
             p.setNombre(String.valueOf(this.comboBoxProductos.getSelectedItem()));
             p.setCantidad(Double.parseDouble(this.textFieldcantidad.getText()));
-
+            
             carniceria.getInventario().add(p);
             JOptionPane.showMessageDialog(rootPane, "Producto ingresado con éxito");
             this.ModelotablaGenerico.addRow(new Object[]{p.getId(), p.getNombre(), p.getCantidad()});
@@ -86,8 +91,8 @@ public class CarniceriaMain extends javax.swing.JFrame {
     }
 
     public void llenarCombobox() {
-        for (int i = 0; i < productos.arrayProductos.size(); i++) {
-            this.comboBoxProductos.addItem(String.valueOf(productos.arrayProductos.get(i).getNombre()));
+        for (int i = 0; i < Productos.arrayProductos.size(); i++) {
+            this.comboBoxProductos.addItem(String.valueOf(Productos.arrayProductos.get(i).getNombre()));
         }
     }
 
@@ -95,6 +100,10 @@ public class CarniceriaMain extends javax.swing.JFrame {
         this.textFieldcantidad.setText("");
         this.textFieldid.setText("");
 
+    }
+    
+    public void SubirAdb(){
+        
     }
 
     /**
@@ -355,17 +364,23 @@ public class CarniceriaMain extends javax.swing.JFrame {
     }//GEN-LAST:event_BotonBorrarActionPerformed
 
     private void comboBoxProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxProductosActionPerformed
-        producto p = new producto();
-        for (producto arrayProducto : productos.arrayProductos) {
-            p.setId(productos.arrayProductos.get(this.comboBoxProductos.getSelectedIndex()).getId());
+
+        Producto p = new Producto();
+        for (Producto arrayProducto : Productos.arrayProductos) {
+            p.setId(Productos.arrayProductos.get(this.comboBoxProductos.getSelectedIndex()).getId());
+
+        
+        for (int i = 0; i < Productos.arrayProductos.size(); i++) {
+            p.setId(Productos.arrayProductos.get(this.comboBoxProductos.getSelectedIndex()).getId());
+
             this.textFieldid.setText(String.valueOf(p.getId()));
         }
     }//GEN-LAST:event_comboBoxProductosActionPerformed
-
+} 
     Integer indice = null;// este indice es una variable global de tipo integer para despues basarse en ella para actualizar la tabla
 
     public int indice(int numero) {
-        this.indice = numero;/// aqui esta su respectivo método
+        this.indice= numero;/// aqui esta su respectivo método
         return indice;
     }
 

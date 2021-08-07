@@ -1,21 +1,25 @@
 
 package Modelos;
 
-import Paquete1.producto;
+import Paquete1.Producto;
 import java.util.ArrayList;
 
 
 public class Carniceria {
     String nombre;
     CarniceriaTipo tipo;
-    ArrayList <producto> inventario;
+    ArrayList <Producto> inventario;
 
-    public ArrayList<producto> getInventario() {
+    public ArrayList<Producto> getInventario() {
         return inventario;
     }
 
     public Carniceria() {
+
         inventario=new ArrayList<>();
+
+        inventario=new ArrayList<Producto>();
+
     }
     public String getNombre() {
         return nombre;

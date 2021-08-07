@@ -9,7 +9,7 @@ package Paquete1;
  *
  * @author Jpadilla
  */
-public class producto {
+public class Producto {
 
     int id;
     String nombre;
@@ -19,10 +19,10 @@ public class producto {
         return id;
     }
 
-    public producto() {
+    public Producto() {
         
     }
-    public producto(int id, String nombre, double cantidad) {
+    public Producto(int id, String nombre, double cantidad) {
         this.id = id;
         this.nombre = nombre;
         this.cantidad = cantidad;
