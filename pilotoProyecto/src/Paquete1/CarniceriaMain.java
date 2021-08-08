@@ -61,7 +61,7 @@ public class CarniceriaMain extends javax.swing.JFrame {
 
     public void Agregar() {
         try {
-            producto p = new producto();
+            Producto p = new Producto();
             if (this.textFieldcantidad.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(rootPane, "Falta seleccionar la cantidad");
                 return;
@@ -85,8 +85,8 @@ public class CarniceriaMain extends javax.swing.JFrame {
     }
 
     public void llenarCombobox() {
-        for (int i = 0; i < productos.arrayProductos.size(); i++) {
-            this.comboBoxProductos.addItem(String.valueOf(productos.arrayProductos.get(i).getNombre()));
+        for (int i = 0; i < Productos.arrayProductos.size(); i++) {
+            this.comboBoxProductos.addItem(String.valueOf(Productos.arrayProductos.get(i).getNombre()));
         }
     }
 
@@ -354,9 +354,9 @@ public class CarniceriaMain extends javax.swing.JFrame {
     }//GEN-LAST:event_BotonBorrarActionPerformed
 
     private void comboBoxProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxProductosActionPerformed
-        producto p = new producto();
-        for (int i = 0; i < productos.arrayProductos.size(); i++) {
-            p.setId(productos.arrayProductos.get(this.comboBoxProductos.getSelectedIndex()).getId());
+        Producto p = new Producto();
+        for (int i = 0; i < Productos.arrayProductos.size(); i++) {
+            p.setId(Productos.arrayProductos.get(this.comboBoxProductos.getSelectedIndex()).getId());
             this.textFieldid.setText(String.valueOf(p.getId()));
         }
     }//GEN-LAST:event_comboBoxProductosActionPerformed

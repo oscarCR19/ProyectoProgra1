@@ -22,7 +22,7 @@ public class entradaInventario extends javax.swing.JFrame {
     public void agregar() {
 
         try {
-            producto p = new producto();
+            Producto p = new Producto();
 
             String id = this.textFieldid.getText();
             String nombre = this.textFieldnombre.getText();
@@ -31,9 +31,9 @@ public class entradaInventario extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(rootPane, "Verifique los campos que se le solicitan");
                 return;
             }
-            for (int i = 0; i < productos.arrayProductos.size(); i++) {
-                if (String.valueOf(productos.arrayProductos.get(i).getId()).equals(this.textFieldid.getText())
-                        || String.valueOf(productos.arrayProductos.get(i).getNombre()).equals(this.textFieldnombre.getText())) {
+            for (int i = 0; i < Productos.arrayProductos.size(); i++) {
+                if (String.valueOf(Productos.arrayProductos.get(i).getId()).equals(this.textFieldid.getText())
+                        || String.valueOf(Productos.arrayProductos.get(i).getNombre()).equals(this.textFieldnombre.getText())) {
                     JOptionPane.showMessageDialog(rootPane, "Los datos Id o nombre ya se encuantran en inventario");
                     return;
                 }
@@ -42,7 +42,7 @@ public class entradaInventario extends javax.swing.JFrame {
             p.setId(Integer.parseInt(this.textFieldid.getText()));
             p.setNombre(nombre);
             
-            productos.arrayProductos.add(p);
+            Productos.arrayProductos.add(p);
             this.tInventarioCentral.addRow(new Object[]{p.getId(),p.getNombre()});
                 
                 
@@ -62,11 +62,11 @@ public class entradaInventario extends javax.swing.JFrame {
     }
     
     public void cargarTabla() {
-        for (int i = 0; i < productos.arrayProductos.size(); i++) {
+        for (int i = 0; i < Productos.arrayProductos.size(); i++) {
             this.tInventarioCentral.addRow(new Object[]{
-                productos.arrayProductos.get(i).getId(),
-                productos.arrayProductos.get(i).getNombre(),
-                productos.arrayProductos.get(i).getCantidad(),});
+                Productos.arrayProductos.get(i).getId(),
+                Productos.arrayProductos.get(i).getNombre(),
+                Productos.arrayProductos.get(i).getCantidad(),});
         }
 
     }
@@ -241,7 +241,7 @@ public class entradaInventario extends javax.swing.JFrame {
        try {
             int p = this.tablaInventarioCentral.getSelectedRow();
             if (p >= 0) {
-                productos.arrayProductos.remove(p);
+                Productos.arrayProductos.remove(p);
                 indice(p);
                 JOptionPane.showMessageDialog(rootPane, "Producto borrardo con éxito");
 
